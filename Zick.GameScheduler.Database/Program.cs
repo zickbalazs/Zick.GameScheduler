@@ -11,12 +11,12 @@ public class Program
     {
         var builder = new HostApplicationBuilder(args);
         
-        builder.Services.AddDbContext<IdentityContext>(options =>
-            options.UseNpgsql(Environment.GetEnvironmentVariable("IDENTITY_DB_CONNECTION")));
         builder.Services.AddDbContext<RaceContext<IdentityUser>>(options =>
             options.UseNpgsql(Environment.GetEnvironmentVariable("RACE_DB_CONNECTION")));
 
-
+        builder.Services
+            .AddDefaultIdentity<IdentityUser>()
+            .AddEntityFrameworkStores<RaceContext<IdentityUser>>();
         var app = builder.Build();
         app.Run();
     }

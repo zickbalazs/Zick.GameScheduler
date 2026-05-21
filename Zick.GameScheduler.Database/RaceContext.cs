@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Zick.GameScheduler.Models;
 
 namespace Zick.GameScheduler.Database;
 
-public class RaceContext<TUser> : DbContext
+public class RaceContext<TUser> : IdentityDbContext
 {
     public DbSet<Track> Tracks { get; set; }
     public DbSet<Vehicle> Vehicles { get; set; }

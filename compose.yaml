@@ -1,0 +1,16 @@
+﻿services:
+  scheduler-db:
+    image: postgres:latest
+    container_name: scheduler-db
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.scheduler.db.dev.env
+  zick.gamescheduler.adminpanel:
+    image: zick.gamescheduler.adminpanel
+    depends_on:
+      - scheduler-db
+    container_name: scheduler-admin
+    build:
+      context: .
+      dockerfile: Zick.GameScheduler.AdminPanel/Dockerfile

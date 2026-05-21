@@ -12,6 +12,7 @@ public class RaceContext<TUser> : IdentityDbContext
     public DbSet<RacingClass> RacingClasses { get; set; }
     public DbSet<League>  Leagues { get; set; }
     public DbSet<LeagueEvent> LeagueEvents { get; set; }
-    public DbSet<EventRace<IdentityUser>> EventRaces { get; set; }
-    public DbSet<Registration<IdentityUser>> Registrations { get; set; }
+    public DbSet<EventRace<TUser>> EventRaces { get; set; }
+    public DbSet<Registration<TUser>> Registrations { get; set; }
+    public DbSet<EventRaceResults<TUser>> EventRaceResults { get; set; }
 }

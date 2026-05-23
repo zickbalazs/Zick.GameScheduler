@@ -1,27 +1,32 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Zick.GameScheduler.Models;
+
 /// <summary>
-/// This object defines a vehicle, that can be used in Automobilista 2.
-/// This object is used most commonly to define racing classes.
+/// Represents a vehicle that users can use in registrations.
 /// </summary>
-public class Vehicle
+/// <seealso href="https://ams2.enum.gg/docs/id/vehicle"/>
+/// <typeparam name="TUser">A user type that can be used to associate with racers.</typeparam>
+public class Vehicle<TUser>
 {
     [Key]
     public Guid Id { get; set; }
     
-    /// <summary>The vehicle model name.</summary>
+    /// <summary>
+    /// The human-readable name of the vehicle
+    /// </summary>
     /// <example>Alpine A110 GT4</example>
     [Required]
     public required string Name { get; set; }
     
-    /// <summary>The location for the image of the vehicle</summary>
-    /// <example>$UPLOADS/img/vehicle.png</example>
-    [Required]
-    public required string ImageUrl { get; set; }
- 
-    /// <summary>The id used in game for the vehicle, the value can change with game updates.</summary>
-    /// <seealso href="https://ams2.enum.gg/docs/id/vehicle"/>
+    /// <summary>
+    /// The identifier that AMS2 uses.
+    /// </summary>
     [Required]
     public required string GameId { get; set; }
+
+    /// <summary>
+    /// Navigation class for the racing classes this vehicle is in.
+    /// </summary>
+    public virtual IList<RacingClass<TUser>> RacingClasses { get; } = [];
 }

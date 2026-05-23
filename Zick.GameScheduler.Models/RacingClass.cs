@@ -3,20 +3,39 @@ using System.ComponentModel.DataAnnotations;
 namespace Zick.GameScheduler.Models;
 
 /// <summary>
-/// This object defines which vehicles fight for which positions.
-/// Can also be used to create multi-class events or to simply define a single class racing event.
+/// Represents racing classes for leagues. Can be also used as a single-model championship if only one car is provided
 /// </summary>
-public class RacingClass
+/// <typeparam name="TUser">A type that can be used to associate with racers.</typeparam>
+public class RacingClass<TUser>
 {
-    /// <summary>The class identifier. Must be given.</summary>
-    /// <example>LMGTE</example>
+    /// <summary>
+    /// The abbreviation of the racing class, can only contain alphanumeric characters.
+    /// Values must be unique due to being used as a key.
+    /// </summary>
+    /// <example>GT3</example>
     [Key]
-    public required string ClassId { get; set; }
-    /// <value>The class' identifying color. Must match a hash-based color code.</value>
-    /// <example>#ae67fe</example>
-    [Required]
-    [RegularExpression(@"^#(?:[0-9a-fA-F]{3}){1,2}$")]
-    public string ClassColor { get; set; } = "#fff";
-    /// <summary>Navigation property for the vehicles used in this class.</summary>
-    public virtual IList<Vehicle> ClassVehicles { get; set; } = [];
+    public required string Abbreviation { get; set; }
+
+    /// <summary>
+    /// The more human-readable version of the class.
+    /// If none is provided, the readable version will be the abbreviation. 
+    /// </summary>
+    public string? Name { get; set; }
+    
+    /// <summary>
+    /// The Color for distinguishing classes.
+    /// Value is optional, is only used for the frontend only.
+    /// </summary>
+    /// <example>#fffeee</example>
+    public string? Color { get; set; }
+
+    /// <summary>
+    /// Navigation Property for the vehicles used in this class.
+    /// </summary>
+    public virtual IList<Vehicle<TUser>> Vehicles { get; } = [];
+    
+    /// <summary>
+    /// Navigation Property for events in which this racing class is used.
+    /// </summary>
+    public virtual IList<Event<TUser>> Events { get; } = [];
 }

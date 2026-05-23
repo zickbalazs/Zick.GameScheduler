@@ -1,26 +1,32 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Zick.GameScheduler.Models;
 
 /// <summary>
-/// This object defines a league that rotates on the server. 
+/// Represents a racing league that users can participate in.
 /// </summary>
-public class League
+/// <typeparam name="TUser">A type that can be used to associate with racers.</typeparam>
+public class League<TUser>
 {
     [Key]
     public Guid Id { get; set; }
     
-    /// <summary>The title of the event. Ideally the main identifying string for the end-user.</summary>
-    /// <example>Rookie Cup</example>
     [Required]
     public required string Name { get; set; }
     
-    /// <summary>The amount of people an event should hold.</summary>
-    public int ParticipantsPerRace { get; set; } = 18;
+    /// <summary>
+    /// The maximum allowed participants in the league.
+    /// By default, the maximum size is the smallest grid size having circuit's limit.
+    /// </summary>
+    public int GridSize { get; set; }
     
-    /// <summary>Navigation property for the classes used in this league.</summary>
-    public virtual IList<RacingClass> Classes { get; } = [];
-    
-    /// <summary>Navigation property for the events in this league</summary>
-    public virtual IList<LeagueEvent> Events { get; } = [];
+    /// <summary>
+    /// Navigation property for racing classes in this league.
+    /// </summary>
+    public virtual IList<RacingClass<TUser>> RacingClasses { get; } = [];
+
+    /// <summary>
+    /// Navigation property for events in this league.
+    /// </summary>
+    public virtual IList<Event<TUser>> Schedule { get; } = [];
 }

@@ -1,29 +1,29 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Zick.GameScheduler.Models;
+
 /// <summary>
-/// Represents an entry for an <c>EventRace</c>
+/// Represents a registration for an Event in a League
 /// </summary>
-/// <typeparam name="TUser">A User type that can be associated for a racer.</typeparam>
+/// <typeparam name="TUser">A user type that can be used to associate with racers.</typeparam>
 public class Registration<TUser>
 {
-    [Key]
     public Guid Id { get; set; }
     
-    /// <summary>The <c>TUser</c>, who wants to race in this registration</summary>
-    [Required]
-    public virtual TUser User { get; set; }
+    /// <summary>
+    /// The race the user registered for.
+    /// </summary>
+    public virtual Race<TUser> Race { get; set; }
     
-    /// <summary>The race in which the user wants to race in.</summary>
+    /// <summary>
+    /// The racing class the user is in.
+    /// </summary>
     [Required]
-    public virtual EventRace<TUser> EventRace { get; set; }
+    public virtual RacingClass<TUser> RacingClass { get; set; }
     
-    /// <summary>The racing class that the user wants to participate in.</summary>
+    /// <summary>
+    /// Navigation property for the car used in this race.
+    /// </summary>
     [Required]
-    public virtual RacingClass RacingClass { get; set; }
-    
-    /// <summary>The vehicle
-    /// which the user wants to use.</summary>
-    [Required]
-    public virtual Vehicle Vehicle { get; set; }
+    public virtual Vehicle<TUser> VehicleUsed { get; set; }
 }

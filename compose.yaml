@@ -5,7 +5,7 @@
     ports:
       - "5432:5432"
     env_file:
-      - ./.scheduler.db.dev.env
+      - ./.env
   zick.gamescheduler.adminpanel:
     image: zick.gamescheduler.adminpanel
     depends_on:

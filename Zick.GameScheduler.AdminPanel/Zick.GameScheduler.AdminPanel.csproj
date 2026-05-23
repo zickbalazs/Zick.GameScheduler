@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Zick.GameScheduler.Data\Zick.GameScheduler.Data.csproj" />
+      <ProjectReference Include="..\Zick.GameScheduler.Models\Zick.GameScheduler.Models.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MudBlazor" Version="9.4.0" />
+      <PackageReference Include="MudBlazor.FontIcons.MaterialIcons" Version="1.4.0" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+﻿@using MudBlazor
+@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+
+<MudLayout>
+    <MudAppBar>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"/>
+        @Constants.AppTitle
+    </MudAppBar>
+    <MudDrawer Variant="DrawerVariant.Responsive"
+               Open="@this.DrawerOpen">
+    </MudDrawer>
+    <MudMainContent>@Body</MudMainContent>
+</MudLayout>
+
+@code
+{
+    bool DrawerOpen { get; set; } = false;
+    async void ToggleDrawer()
+    {
+        DrawerOpen = !DrawerOpen;
+    }
+}

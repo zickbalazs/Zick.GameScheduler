@@ -26,4 +26,10 @@ public class Registration<TUser>
     /// </summary>
     [Required]
     public virtual Vehicle<TUser> VehicleUsed { get; set; }
+
+    /// <summary>
+    /// Navigation property for the user in this race.
+    /// </summary>
+    [Required]
+    public virtual TUser Racer { get; set; }
 }
